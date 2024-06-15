@@ -4,8 +4,8 @@ import Header from "@/components/header/Header";
 import { Separator } from "@/components/ui/separator";
 
 export const metadata: Metadata = {
-  title: "BiHamTha Travel Agency",
-  description: "BiHamTha Travel Agency",
+  title: "Trip Navigator",
+  description: "Trip Navigator",
 };
 
 export default function RootLayout({

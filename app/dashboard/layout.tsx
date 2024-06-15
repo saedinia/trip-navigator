@@ -16,8 +16,8 @@ import Link from "next/link";
 import { DialogSaveLocations as Dialog } from "@/components/elements/dialogs/DialogSaveLocations";
 
 export const metadata: Metadata = {
-  title: "Dashboard | BiHamTha Travel Agency",
-  description: "Dashboard | BiHamTha Travel Agency",
+  title: "Dashboard | Trip Navigator",
+  description: "Dashboard | Trip Navigator",
 };
 
 export default async function RootLayout({
