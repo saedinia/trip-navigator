@@ -51,7 +51,7 @@ export async function getLastPosts(limit: number = 5) {
     }
 
     const res = await fetch(`${baseUrl}/api/posts/?limit=${limit}`, {
-      cache: "default",
+      cache: "no-store",
       method: "GET",
     });
 
