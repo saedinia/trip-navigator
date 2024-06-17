@@ -38,6 +38,43 @@ export async function getPostById(postId: string) {
 }
 
 /**
+ *  GET post by ID
+ */
+export async function getPostBySlug(slug: string) {
+  try {
+    if (!slug) {
+      console.error("Missing required fields");
+      return {
+        message: "Error in get post by slug",
+        value: slug,
+      };
+    }
+
+    const res = await fetch(`${baseUrl}/api/posts?slug=${slug}`, {
+      cache: "default",
+      method: "GET",
+    });
+
+    const data = await res.json();
+    if (res.status === 200) {
+      return data.posts;
+    } else if (res.status === 404) {
+      return res;
+    } else {
+      return {
+        message: "Error in get post by slug",
+        value: IdleDeadline,
+      };
+    }
+  } catch (error) {
+    return {
+      message: "",
+      value: error,
+    };
+  }
+}
+
+/**
  *  GET Last post - default 5
  */
 export async function getLastPosts(limit: number = 5) {

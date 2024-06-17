@@ -62,7 +62,9 @@ export default async function Home() {
             image={posts[0].image}
             subtitle={posts[0].subtitle}
             ctaText="Explore now"
-            ctaLink={"/blog/" + posts[0]._id}
+            ctaLink={`/blog/${posts[0].title
+              .toLowerCase()
+              .replace(/\s+/g, "-")}`}
             className="mt-4"
           />
         )}
@@ -114,7 +116,9 @@ export default async function Home() {
               <Layout3
                 image={posts[1].image}
                 ctaText={posts[1].title}
-                ctaLink={"/blog/" + posts[1]._id}
+                ctaLink={`/blog/${posts[1].title
+                  .toLowerCase()
+                  .replace(/\s+/g, "-")}`}
               />
             )}
 
@@ -122,7 +126,9 @@ export default async function Home() {
               <Layout3
                 image={posts[2].image}
                 ctaText={posts[2].title}
-                ctaLink={"/blog/" + posts[2]._id}
+                ctaLink={`/blog/${posts[2].title
+                  .toLowerCase()
+                  .replace(/\s+/g, "-")}`}
               />
             )}
 
@@ -130,7 +136,9 @@ export default async function Home() {
               <Layout3
                 image={posts[3].image}
                 ctaText={posts[3].title}
-                ctaLink={"/blog/" + posts[3]._id}
+                ctaLink={`/blog/${posts[3].title
+                  .toLowerCase()
+                  .replace(/\s+/g, "-")}`}
               />
             )}
 
@@ -138,7 +146,9 @@ export default async function Home() {
               <Layout3
                 image={posts[4].image}
                 ctaText={posts[4].title}
-                ctaLink={"/blog/" + posts[4]._id}
+                ctaLink={`/blog/${posts[4].title
+                  .toLowerCase()
+                  .replace(/\s+/g, "-")}`}
               />
             )}
           </div>

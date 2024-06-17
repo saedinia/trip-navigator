@@ -57,12 +57,14 @@ export async function POST(req: NextRequest) {
     );
   }
 }
+
 // GET Request
 export async function GET(req: NextRequest) {
   await connectMongoDB();
   console.log("GET request");
   const userId = req.nextUrl.searchParams.get("userId");
   const postId = req.nextUrl.searchParams.get("postId");
+  let title = req.nextUrl.searchParams.get("slug");
   const limit = parseInt(req.nextUrl.searchParams.get("limit") || "0");
 
   try {
@@ -70,6 +72,17 @@ export async function GET(req: NextRequest) {
     if (postId) {
       posts = await Post.findById(postId);
       if (!posts) {
+        return NextResponse.json(
+          {
+            message: "Post not found",
+          },
+          { status: 404 }
+        );
+      }
+    } else if (title) {
+      title = title.replace(/-/g, " ");
+      posts = await Post.findOne({ title: new RegExp(`^${title}$`, "i") });
+      if (!posts || posts.length === 0) {
         return NextResponse.json(
           {
             message: "Post not found",

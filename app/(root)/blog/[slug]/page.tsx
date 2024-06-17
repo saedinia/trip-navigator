@@ -2,13 +2,20 @@ import { Post } from "@/app/dashboard/posts/page";
 import MaxLimitWrapper from "@/components/elements/MaxLimitWrapper";
 import Options from "@/components/header/Options";
 import Hero from "@/components/hero/Hero";
-import { getPostById } from "@/controllers/postController";
+import { getPostBySlug } from "@/controllers/postController";
 import { formatDate } from "@/lib/utils";
 import { CalendarDays, FilePenLine } from "lucide-react";
+import { notFound } from "next/navigation";
 
 const BlogPage = async ({ params }: any) => {
-  const { postid } = params;
-  const post: Post = await getPostById(postid);
+  const { slug } = params;
+  const res = await getPostBySlug(slug);
+
+  if (res.status == 404) {
+    notFound();
+  }
+
+  const post: Post = res;
 
   return (
     <>

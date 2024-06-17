@@ -140,7 +140,12 @@ const DashboardPage: React.FC = () => {
                         </AlertDialog>
 
                         <Button variant={"orange"} asChild>
-                          <Link href={`/blog/${post._id} `} target="_blank">
+                          <Link
+                            href={`/blog/${post.title
+                              .toLowerCase()
+                              .replace(/\s+/g, "-")} `}
+                            target="_blank"
+                          >
                             View
                           </Link>
                         </Button>
