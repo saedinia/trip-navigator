@@ -8,12 +8,12 @@ import Layout2 from "@/components/tiles/Layout2";
 import { getLastPosts } from "@/controllers/postController";
 import { LocationDetails } from "@/lib/class/location";
 import { getLocationDetailsByIds } from "@/lib/data/location";
-import { Post } from "../dashboard/posts/page";
 import Hero from "@/components/hero/Hero";
 import Layout3 from "@/components/tiles/Layout3";
+import { IPost } from "@/lib/interface";
 
 export default async function Home() {
-  const posts: Post[] = await getLastPosts(5);
+  const posts: IPost[] = await getLastPosts(5);
 
   const images = [
     {

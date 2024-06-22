@@ -1,8 +1,8 @@
-import { Post } from "@/app/dashboard/posts/page";
 import MaxLimitWrapper from "@/components/elements/MaxLimitWrapper";
 import Options from "@/components/header/Options";
 import Hero from "@/components/hero/Hero";
 import { getPostBySlug } from "@/controllers/postController";
+import { IPost } from "@/lib/interface";
 import { formatDate } from "@/lib/utils";
 import { CalendarDays, FilePenLine } from "lucide-react";
 import { notFound } from "next/navigation";
@@ -15,7 +15,7 @@ const BlogPage = async ({ params }: any) => {
     notFound();
   }
 
-  const post: Post = res;
+  const post: IPost = res;
 
   return (
     <>

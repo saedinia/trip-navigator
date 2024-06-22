@@ -27,22 +27,10 @@ import {
 import { deletePost } from "@/controllers/postController";
 import Spinner from "@/components/elements/Spinner";
 import { formatDateTime } from "@/lib/utils";
-
-export interface Post {
-  _id: string;
-  title: string;
-  subtitle: string;
-  author: string;
-  publicationDate: string;
-  content?: string;
-  image: string;
-  locationId?: string;
-  createdAt?: string;
-  updatedAt?: string;
-}
+import { IPost } from "@/lib/interface";
 
 const DashboardPage: React.FC = () => {
-  const [posts, setPosts] = useState<Post[]>([]);
+  const [posts, setPosts] = useState<IPost[]>([]);
   const [loading, setLoading] = useState(true);
 
   const fetchPosts = async () => {
@@ -91,7 +79,7 @@ const DashboardPage: React.FC = () => {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {posts.map((post: Post) => (
+                {posts.map((post: IPost) => (
                   <TableRow key={post._id} className="border-b">
                     <TableCell>
                       <p className="font-semibold">{post.title}</p>
