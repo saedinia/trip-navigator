@@ -1,8 +1,8 @@
 import fetch from "node-fetch";
 import { LocationDetails } from "@/lib/class/location";
-import { TRIPADVISOR_API_KEY_1 } from "@/lib/utils";
+import { TRIPADVISOR_API_KEY_1, TRIPADVISOR_API_KEY_2 } from "@/lib/utils";
 
-const TRIPADVISOR_API_KEYS = [TRIPADVISOR_API_KEY_1];
+const TRIPADVISOR_API_KEYS = [TRIPADVISOR_API_KEY_1, TRIPADVISOR_API_KEY_2];
 
 if (TRIPADVISOR_API_KEYS.some((key) => !key)) {
   throw new Error("TripAdvisor API keys are missing in environment variables");

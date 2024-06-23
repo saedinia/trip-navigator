@@ -132,6 +132,7 @@ export default async function page({ params }: any) {
               <SaveLocation
                 userId={user ? user.id : "0"}
                 locationId={user ? locationid : "0"}
+                locationName={location[0].getName()}
               />
             </CardFooter>
           </Card>

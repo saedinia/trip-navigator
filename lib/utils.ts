@@ -7,6 +7,9 @@ export const baseUrl =
 export const TRIPADVISOR_API_KEY_1 =
   process.env.NEXT_PUBLIC_TRIPADVISOR_API_KEY_1;
 
+export const TRIPADVISOR_API_KEY_2 =
+  process.env.NEXT_PUBLIC_TRIPADVISOR_API_KEY_2;
+
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }

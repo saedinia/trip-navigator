@@ -1,5 +1,4 @@
 "use client";
-import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import {
   createSaveLocation,
@@ -10,8 +9,30 @@ import { toast } from "sonner";
 import { ISaveLocation } from "@/controllers/saveLocationController";
 import { Heart_f, Location_f, Travelbag_f } from "@/app/dashboard/icons";
 import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
-import { Dialog, DialogContent } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import LoginRegisterLink from "./LoginRegisterLink";
+
+import {
+  WhatsappIcon,
+  WhatsappShareButton,
+  TelegramIcon,
+  TelegramShareButton,
+  EmailShareButton,
+  EmailIcon,
+  FacebookShareButton,
+  FacebookIcon,
+  TwitterIcon,
+  TwitterShareButton,
+} from "react-share";
+import { usePathname } from "next/navigation";
+import { baseUrl } from "@/lib/utils";
+import { Button } from "../ui/button";
 
 export interface IResult {
   message: string;
@@ -20,17 +41,26 @@ export interface IResult {
 function SaveLocation({
   userId,
   locationId,
+  locationName,
 }: {
   userId: string;
   locationId: string;
+  locationName: string;
 }) {
   const [open, setOpen] = useState(false);
+  const [openShare, setOpenShare] = useState(false);
+
+  const [copyText, setCopyText] = useState("copy");
 
   const [favorite, setFavorite] = useState<string>("");
   const [plans, setPlans] = useState<string>("");
   const [place, setPlace] = useState<string>("");
 
   let result: IResult;
+
+  const pathname = usePathname();
+  const shareUrl = baseUrl + pathname;
+  const title = `TripNavigator - ${locationName}`;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -146,20 +176,78 @@ function SaveLocation({
           </div>
         )}
       </div>
-      {/* <div className="flex space-x-2 items-center">
-        <Link href="#">
-          <div>{svgIcons.link}</div>
-        </Link>
-        <Link href="#">
+      <div className="flex space-x-2 items-center">
+        <div
+          className="cursor-pointer"
+          onClick={() => {
+            setOpenShare(true);
+          }}
+        >
+          {svgIcons.link}
+        </div>
+        {/* <Link href="#">
           <div>{svgIcons.map}</div>
-        </Link>
-      </div> */}
+        </Link> */}
+      </div>
 
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent className="sm:max-w-xl text-center">
           <h3>You must be a member to be able to save a location</h3>
           <div className="grid space-y-4 items-center min-w-60 mx-auto mt-4">
             <LoginRegisterLink />
+          </div>
+        </DialogContent>
+      </Dialog>
+
+      <Dialog open={openShare} onOpenChange={setOpenShare}>
+        <DialogContent className="sm:max-w-xl text-center">
+          <DialogHeader>
+            <DialogTitle>Share location: {locationName}</DialogTitle>
+            <DialogDescription>
+              Share location with your friends and others
+            </DialogDescription>
+          </DialogHeader>
+          <div className="flex justify-center gap-2">
+            <EmailShareButton url={shareUrl} title={title}>
+              <EmailIcon size={40} round />
+            </EmailShareButton>
+            <WhatsappShareButton url={shareUrl} title={title}>
+              <WhatsappIcon size={40} round />
+            </WhatsappShareButton>
+            <TelegramShareButton url={shareUrl} title={title}>
+              <TelegramIcon size={40} round />
+            </TelegramShareButton>
+            <FacebookShareButton url={shareUrl} title={title}>
+              <FacebookIcon size={40} round />
+            </FacebookShareButton>
+            <TwitterShareButton url={shareUrl} title={title}>
+              <TwitterIcon size={40} round />
+            </TwitterShareButton>
+          </div>
+
+          <div className="search-box">
+            <div className="max-w-screen-md mx-auto shadow-shadowSmall border-2 rounded-3xl px-4 py-1 my-2 overflow-hidden md:px-1">
+              <div className="flex items-center flex-col md:flex-row">
+                <div className="flex items-center w-full border-b-2 md:border-none py-2 md:py-0">
+                  <input
+                    type="text"
+                    className="w-full p-2 placeholder-gray-400 focus:outline-none"
+                    readOnly
+                    value={shareUrl}
+                  />
+                </div>
+                <Button
+                  variant={"green"}
+                  className="w-full my-4 md:w-auto md:my-0"
+                  onClick={() => {
+                    navigator.clipboard.writeText(shareUrl);
+                    setCopyText("Copied!");
+                  }}
+                >
+                  {copyText}
+                </Button>
+              </div>
+            </div>
           </div>
         </DialogContent>
       </Dialog>
